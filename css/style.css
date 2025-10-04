@@ -1,5 +1,17 @@
 *{padding: 0; margin: 0; box-sizing: border-box;}
 
+body::-webkit-scrollbar {
+    width: 3px;
+    height: 100%;
+    background: rgb(190, 190, 190);
+}
+
+body::-webkit-scrollbar-thumb {
+    width: 3px;
+    background: rgb(49, 49, 49);
+}
+
+
 .books {
     width: 95%;
     margin: 10px auto;
@@ -655,6 +667,7 @@
     flex-direction: column;
     background: #FFF;
     align-items: center;
+    justify-content: space-between;
 }
 
 .main__news-section .main__podcasts-div {
@@ -822,12 +835,23 @@
 }
 
 .main__news-div {
-    width: 70%;
+    width: 80%;
+    height: 100%;
+    max-height: 300vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
     margin-top: 65px;
+    overflow-y: scroll;
+}
+
+.main__news-div::-webkit-scrollbar {
+    display: none;
+}
+
+.main__news-div .all__materials-div.hidden {
+    display: none;
 }
 
 .main__news-div .news__item {
@@ -1005,9 +1029,7 @@
     background: url('../img/popular-fire-icon.png') no-repeat;
 }
 
-.main__news-div .all__materials-div {
-    position: absolute;
-    bottom: 36rem;
+.all__materials-div {
     width: 265px;
     height: 40px;
     display: flex;
@@ -1027,10 +1049,18 @@
     cursor: pointer;
 }
 
-.main__news-div .news__registration-part {
-    position: absolute;
-    bottom: 220px;
-    width: 80%;
+.news__last-part {
+    width: 90%;
+    margin-top: 30px;
+    margin-bottom: 200px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+}
+
+.news__registration-part {
+    width: 100%;
     height: 300px;
     background: linear-gradient(45deg, #263cff 3.87%, #8b61ff 94.97%);
 }
@@ -1362,11 +1392,15 @@
 
 .main .main__comments-section {
     width: 20%;
-    height: 100%;
+    max-height: 500vh;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow-y: scroll;
     padding: 30px 0 20px 15px;
+}
+
+.main .main__comments-section::-webkit-scrollbar {
+    display: none;
 }
 
 .comment__title {
@@ -1482,6 +1516,16 @@
 }
 
 @media (max-width: 1024px) {
+
+    .main__news-div {
+        overflow-y: unset;
+        max-height: unset;
+    }
+
+    .news__last-part {
+        display: none;
+    }
+
     .books {
         display: none;
     }
@@ -1590,6 +1634,10 @@
         position: static;
     }
 
+    .main__news-div .news__last-part {
+        margin-bottom: 30px;
+    }
+
     .main .main__comments-section {
         width: 300px;
         height: 100vh;
@@ -1602,6 +1650,7 @@
         direction: ltr;
         padding-bottom: 150px;
         transition: .2s ease;
+        z-index: 100;
     }
 
         .main .main__comments-section.is-fixed {
@@ -1628,6 +1677,7 @@
         background: #F6F6F6;
         margin-top: 25px;
         right: 0;
+        cursor: pointer;
     }
 
         .main__comment-open-bar.is-fixed {
@@ -1698,7 +1748,7 @@
     }
 
     .main__news-div {
-        width: 100%;
+        width: 100vw;
         padding: 0;
         margin-top: 10px;
     }
@@ -1722,6 +1772,7 @@
         width: 100%;
         margin-top: 20px;
     }
+
     .main__podcasts-div .podcast__item:nth-child(1) .podcast__item-inner-div {
         bottom: 150px;
     }
@@ -1730,8 +1781,18 @@
         display: none !important;
     }
 
+    .news__last-part .all__materials-div {
+        display: none;
+    }
+
     .main__news-div .hiddened-in-mobile {
         display: none !important;
+    }
+
+    .main__news-div .all__materials-div.hidden {
+        width: 80%;
+        height: 50px;
+        display: flex;
     }
 
     .main__news-div .appeared--mobile {
